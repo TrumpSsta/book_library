@@ -5,8 +5,7 @@ import com.google.gson.annotations.SerializedName;
 
 public class IndustryIdentifier {
 
-    @SerializedName("type")
-    @Expose
+
     private String type;
     @SerializedName("identifier")
     @Expose

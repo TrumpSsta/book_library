@@ -18,39 +18,22 @@ public class VolumeInfo {
     @SerializedName("publisher")
     @Expose
     private String publisher;
-    @SerializedName("industryIdentifiers")
-    @Expose
-    private List<IndustryIdentifier> industryIdentifiers = null;
-    @SerializedName("readingModes")
-    @Expose
-    private ReadingModes readingModes;
-    @SerializedName("printType")
-    @Expose
-    private String printType;
-    @SerializedName("maturityRating")
-    @Expose
-    private String maturityRating;
-    @SerializedName("allowAnonLogging")
-    @Expose
-    private Boolean allowAnonLogging;
-    @SerializedName("contentVersion")
-    @Expose
-    private String contentVersion;
-    @SerializedName("imageLinks")
-    @Expose
-    private ImageLinks imageLinks;
+
+
+    private  List<IndustryIdentifier> industryIdentifiers = null;
+    private  ReadingModes readingModes;
+    private  String printType;
+    private  String maturityRating;
+    private  Boolean allowAnonLogging;
+    private  String contentVersion;
+    private  ImageLinks imageLinks;
+
     @SerializedName("language")
     @Expose
     private String language;
-    @SerializedName("previewLink")
-    @Expose
-    private String previewLink;
-    @SerializedName("infoLink")
-    @Expose
-    private String infoLink;
-    @SerializedName("canonicalVolumeLink")
-    @Expose
-    private String canonicalVolumeLink;
+    private  String previewLink;
+    private  String infoLink;
+    private  String canonicalVolumeLink;
     @SerializedName("subtitle")
     @Expose
     private String subtitle;
@@ -72,6 +55,8 @@ public class VolumeInfo {
     @SerializedName("averageRating")
     @Expose
     private double averageRating;
+
+
 
     public String getTitle() {
         return title;
@@ -223,6 +208,10 @@ public class VolumeInfo {
 
     public void setCategories(List<String> categories) {
         this.categories = categories;
+    }
+    public String getIsbn(){
+        List <IndustryIdentifier> isbn = getIndustryIdentifiers();
+        return isbn.get(0).getIdentifier();
     }
     @Override
     public String toString() {

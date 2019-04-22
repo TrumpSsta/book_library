@@ -8,22 +8,19 @@ import java.io.*;
 import java.sql.Date;
 import java.text.DateFormat;
 import java.util.List;
+import java.util.Scanner;
 
 @SpringBootApplication
 public class BookLibraryApplication {
 
     public static void main(String[] args) throws FileNotFoundException {
 
-        Gson gson = new GsonBuilder().serializeNulls().create();
+        getJson file = new getJson();
+        //file.selectFile();
+        file.readJson("/home/jedrzej/Documents/books.json");
 
-        Book book;
-        BufferedReader reader = new BufferedReader(new FileReader("/home/jedrzej/Documents/books.json"));
-        book = gson.fromJson(reader, Book.class);
-        List<Item> x =  book.getItems();
-        VolumeInfo informations = x.get(1).getVolumeInfo();
-        System.out.println(informations.toString());
 
-       // SpringApplication.run(BookLibraryApplication.class, args);
+        SpringApplication.run(BookLibraryApplication.class, args);
     }
 
 }
