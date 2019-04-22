@@ -17,7 +17,7 @@ public class BookLibraryApplication {
         Gson gson = new GsonBuilder().serializeNulls().create();
 
         Book book;
-        BufferedReader reader = new BufferedReader(new FileReader("/home/jedrzej/Documents/books.json"));
+        BufferedReader reader = new BufferedReader(new FileReader("C:\\Users\\komp\\Downloads\\Cognifide - Java Homework 2019 (2)\\books.json"));
         book = gson.fromJson(reader, Book.class);
         List<Item> x =  book.getItems();
         VolumeInfo informations = x.get(1).getVolumeInfo();
