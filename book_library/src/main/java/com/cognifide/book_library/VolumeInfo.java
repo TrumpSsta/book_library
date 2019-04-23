@@ -11,13 +11,31 @@ import java.util.List;
 import static ch.qos.logback.core.joran.action.ActionConst.NULL;
 
 public class VolumeInfo {
+    public VolumeInfo() {
+        this.thumbnailUrl = getThumbnailUrl();
+    }
 
+    @SerializedName("isbn")
+    @Expose
+    private String Isbn13 ;
     @SerializedName("title")
     @Expose
     private String title;
+    @SerializedName("subtitle")
+    @Expose
+    private String subtitle;
     @SerializedName("publisher")
     @Expose
-    private String publisher;
+    private String publisher ;
+    @SerializedName("publishedDate")
+    @Expose
+    private String publishedDate;
+    @Expose
+    @SerializedName("description")
+    private String description;
+    @SerializedName("pageCount")
+    @Expose
+    private Integer pageCount;
     private  List<IndustryIdentifier> industryIdentifiers = null;
     private  ReadingModes readingModes;
     private  String printType;
@@ -25,34 +43,43 @@ public class VolumeInfo {
     private  Boolean allowAnonLogging;
     private  String contentVersion;
     private  ImageLinks imageLinks;
+    @SerializedName("thumbnailUrl")
+    @Expose
+    private String thumbnailUrl;
+    public String getThumbnailUrl() {
+        return thumbnailUrl;
+    }
+    public void setThumbnailUrl() {
+        this.thumbnailUrl = imageLinks.getThumbnail();
+    }
 
     @SerializedName("language")
     @Expose
     private String language;
+    @SerializedName("previewLink")
+    @Expose
     private  String previewLink;
     private  String infoLink;
     private  String canonicalVolumeLink;
-    @SerializedName("subtitle")
+    @SerializedName("averageRating")
     @Expose
-    private String subtitle;
-    @SerializedName("authors")
+    private double averageRating ;
+   @SerializedName("authors")
     @Expose
     private List<String> authors = null;
-    @SerializedName("publishedDate")
-    @Expose
-    private String publishedDate;
-    @SerializedName("description")
-    @Expose
-    private String description;
-    @SerializedName("pageCount")
-    @Expose
-    private Integer pageCount;
     @SerializedName("categories")
     @Expose
     private List<String> categories = null;
-    @SerializedName("averageRating")
-    @Expose
-    private double averageRating;
+
+
+
+    public double getAverageRating() {
+        return averageRating;
+    }
+
+    public void setAverageRating(double averageRating) {
+        this.averageRating = averageRating;
+    }
 
 
 
@@ -207,22 +234,32 @@ public class VolumeInfo {
     public void setCategories(List<String> categories) {
         this.categories = categories;
     }
-    public String getIsbn(Item item ){
+    public String getIsbn(){
         List <IndustryIdentifier> isbn = industryIdentifiers;
 
+        this.thumbnailUrl = imageLinks.getThumbnail();
+        this.description=StringUtils.substringBefore(description,".");
 
-
-        if(isbn.get(0).getType().contentEquals("ISBN_13"))return isbn.get(0).getIdentifier();
+        if(isbn.get(0).getType().contentEquals("ISBN_13")){
+            Isbn13 =isbn.get(0).getIdentifier();
+            return isbn.get(0).getIdentifier();
+        }
             else if(isbn.size()>1) {
             if (isbn.get(1).getType().contentEquals("ISBN_13"))
+                Isbn13 =isbn.get(1).getIdentifier();
                 return isbn.get(1).getIdentifier();
 
         }
         if(isbn.get(0).getType()!="ISBN_13" && isbn.get(0).getType()!="ISBN_10")
-            return item.getId();
+            return "0";
         else return "1";
     }
+    public String getAutorsWithRating()
+    {
+        List<String>authors = getAuthors();
+        return new ToStringBuilder(this).append("author", getAuthors()).append("title", title).append("publisher", publisher).toString();
 
+    }
    // @Override
    // public String toString() {
     //    List <IndustryIdentifier> isbn = getIndustryIdentifiers();
