@@ -64,7 +64,7 @@ public class VolumeInfo {
     @SerializedName("averageRating")
     @Expose
     private double averageRating ;
-   @SerializedName("authors")
+    @SerializedName("authors")
     @Expose
     private List<String> authors = null;
     @SerializedName("categories")
@@ -254,12 +254,7 @@ public class VolumeInfo {
             return "0";
         else return "1";
     }
-    public String getAutorsWithRating()
-    {
-        List<String>authors = getAuthors();
-        return new ToStringBuilder(this).append("author", getAuthors()).append("title", title).append("publisher", publisher).toString();
 
-    }
    // @Override
    // public String toString() {
     //    List <IndustryIdentifier> isbn = getIndustryIdentifiers();

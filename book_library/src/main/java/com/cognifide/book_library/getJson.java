@@ -12,11 +12,17 @@ import java.util.Scanner;
 public class getJson {
 
     String jsonFile;
+    List<Item> items;
     public void selectFile()
     {
         Scanner scan = new Scanner(System.in);
         System.out.println("Podaj sciezke do pliku");
         this.jsonFile = scan.nextLine();
+
+    }
+
+    public String getJsonFile() {
+        return jsonFile;
     }
 
     public getJson() {
@@ -37,4 +43,6 @@ public class getJson {
         VolumeInfo informations = x.get(1).getVolumeInfo();
         return x;
     }
+
+
 }
