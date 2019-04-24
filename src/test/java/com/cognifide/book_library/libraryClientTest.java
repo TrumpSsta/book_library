@@ -1,6 +1,7 @@
 package com.cognifide.book_library;
 
 
+import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.server.LocalServerPort;
@@ -14,7 +15,13 @@ public class libraryClientTest {
 //    @LocalServerPort
 //    private int port;
 //    @Autowired
-//    private libraryClient controller;
+//    private LibraryClient controller;
+//    GetJson json = null;
+//    @Before
+//    public void setUp() throws Exception {
+//    json=new GetJson("book.json");
+//    }
+//
 //
 //
 //    @Test

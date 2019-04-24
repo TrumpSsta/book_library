@@ -14,12 +14,11 @@ public class ControllerMethods {
         List<Item> list = json.readJson(json.getJsonFile());
         String json1;
         for(Item item : list) {
-
             if (item.getVolumeInfo().getIsbn().equals(id)) {
                 item.getVolumeInfo().getIsbn();
-
                 json1 = gson.toJson(item.getVolumeInfo());
                 return json1;
+
             }else if (item.getVolumeInfo().getIsbn().equals("0")) {
                 item.getVolumeInfo().setIsbn13(item.getId());
                 if (item.getVolumeInfo().getIsbn13().equals(id)) {
@@ -27,11 +26,7 @@ public class ControllerMethods {
                     return  json1;
                 }
             }
-
-
         }
-
-
         return "0";
     }
     //return json as String, for given category
@@ -39,11 +34,14 @@ public class ControllerMethods {
         String listOfBooks ="[ \n";
         StringBuilder sB = new StringBuilder(listOfBooks);
         List<Item> list = json.readJson(json.getJsonFile());
+        //searching for every item
         for(Item item : list) {
             item.getVolumeInfo().getIsbn();
+            //if isbn number doesn't exist, take ID
             if (item.getVolumeInfo().getIsbn().equals("0"))
                 item.getVolumeInfo().setIsbn13(item.getId());
             List<String> categories = item.getVolumeInfo().getCategories();
+            //if there are categories, write it to string builder
             if(categories!=null) {
                 for (int i=0;i<categories.size();i++) {
                     if (categories.get(i).equals(id)){
@@ -51,8 +49,6 @@ public class ControllerMethods {
                         String json1 = gson.toJson(item.getVolumeInfo());
                         sB.append(json1+","+ System.lineSeparator());
                     }
-
-
                 }
             }
         }
@@ -68,6 +64,7 @@ public class ControllerMethods {
         Map<String,Double> authorWithRating = new HashMap<>();
         StringBuilder sB = new StringBuilder(listOfBooks);
         List<Item> list = json.readJson(json.getJsonFile());
+        //check every book for one author
         for(String author : authors) {
             double rating=0.0;
             int counter=0;
@@ -75,31 +72,25 @@ public class ControllerMethods {
                 if (item.getVolumeInfo().getAuthors() != null) {
                     for (String name : item.getVolumeInfo().getAuthors()) {
                         if (name.equals(author)&&!Double.isNaN(item.getVolumeInfo().getAverageRating())) {
-
                                 rating+=item.getVolumeInfo().getAverageRating();
                                 counter++;
                             }
-
                     }
-
                 }
             }
-
             if(counter>0&&(rating=rating/counter)>0) {
                 authorWithRating.put(author,rating);
-
-
             }
         }
-
+        //sort descend
         LinkedHashMap<String, Double> reverseSortedMap = new LinkedHashMap<>();
         authorWithRating.entrySet()
                 .stream()
                 .sorted(Map.Entry.comparingByValue(Comparator.reverseOrder()))
                 .forEachOrdered(x -> reverseSortedMap.put(x.getKey(), x.getValue()));
         for (Map.Entry<String,Double> pair : reverseSortedMap.entrySet()) {
-            sB.append("  {  \n    \"author\": \"" + pair.getKey() + "\"," + System.lineSeparator());
-            sB.append("  {  \n    \"averageRating\": " + pair.getValue() + System.lineSeparator() + "  }," + System.lineSeparator());
+            sB.append(" {  \n  \"author\": \"" + pair.getKey() + "\"," + System.lineSeparator());
+            sB.append(" {  \n  \"averageRating\": " + pair.getValue() + System.lineSeparator() + " }," + System.lineSeparator());
         }
         sB.append("]");
         listOfBooks= sB.toString();
@@ -111,6 +102,7 @@ public class ControllerMethods {
 
         List<String>authors = new LinkedList<>();
         List<Item> list = json.readJson(json.getJsonFile());
+        //for every item check for author, that is not already on list
         for(Item item : list) {
             if(item.getVolumeInfo().getAuthors()!=null) {
                 for (String name : item.getVolumeInfo().getAuthors()) {

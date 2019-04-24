@@ -248,17 +248,17 @@ public class VolumeInfo {
 
         this.thumbnailUrl = imageLinks.getThumbnail();
         this.description=StringUtils.substringBefore(description,".");
-
+        //if first value is isbn13 return it
         if(isbn.get(0).getType().contentEquals("ISBN_13")){
             isbn13 =isbn.get(0).getIdentifier();
             return isbn13;
-        }
+        }//if second value is isbn13 return it
             else if(isbn.size()>1&&isbn.get(1).getType().contentEquals("ISBN_13")) {
                 isbn13 = isbn.get(1).getIdentifier();
                 return isbn13;
             }
 
-
+        //return 0 if there is no isbn13 number
          return "0";
     }
 
