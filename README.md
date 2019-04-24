@@ -42,7 +42,11 @@ To get book with isbn number, put this address into browser:
 ```
 http://localhost:8080/category/"here put book category name"  
 ```
+To get author rating, put this address into browser:
 
+```
+http://localhost:8080/rating 
+```
 ## Running the tests
 I used Junit 4 for tests.
 
