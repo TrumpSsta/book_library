@@ -1,6 +1,7 @@
 package com.cognifide.book_library;
 
 
+import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,11 +13,12 @@ import java.io.FileNotFoundException;
 @RestController
 public class LibraryClient {
 
-    GetJson json = new GetJson();
 
+    GetJson json = new GetJson("books.json");
+    @Order(1)
     @PostConstruct
     public void initialize() {
-        json.selectFile();
+
     }
 
     //Metoda GET, zwracająca książke o danym numerze isbn

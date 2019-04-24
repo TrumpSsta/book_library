@@ -17,7 +17,6 @@ public class GetJson {
     public void selectFile()
     {
         Scanner scan = new Scanner(System.in);
-        System.out.println("Podaj sciezke do pliku");
         this.jsonFile = scan.nextLine();
 
     }
