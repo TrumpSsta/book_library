@@ -8,7 +8,7 @@ Spring Boot application, works on localhost, port 8080. There are 3 points, whic
 * list of all books that are assigned to the requested category,
 * Lists all authors and their rating, sorted descending.
 
-Project was written in Intellij Idea. 
+Project was written in Intellij Idea using JAVA 8. 
 To generate Plain Old Java Object (POJO) from json i used [jsonschema2pojo](https://github.com/joelittlejohn/jsonschema2pojo/), so there are some additional classes i wasn't working with.<br />
 Main methods are placed in the classes described below:
 * LibraryClient.java- rest controller,
@@ -44,9 +44,9 @@ After running you can use application in your browser.
 To get book with isbn number, put this address into browser:
 
 ```
-http://localhost:8080/isbn/9781592432172
+http://localhost:8080/isbn/9780080568782
 ```
-The "9781592432172" number can be replacew with book isbn13 number, or book id when doesn't have isbn13. 
+The "9780080568782" number can be replacew with book isbn13 number, or book id when doesn't have isbn13. 
 
 To get book with isbn number, put this address into browser:
 
