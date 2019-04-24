@@ -15,12 +15,12 @@ At first clone repository
 $ git clone https://github.com/TrumpSsta/book_library.git
 ```
 
-###Build Project
+### Build Project
 To build the project use following command:
 ```
 ./gradlew build
 ```
-###Running
+### Running
 After building the application run following command to start it:
 ```
 ./gradlew run
