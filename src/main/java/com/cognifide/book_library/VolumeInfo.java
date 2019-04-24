@@ -252,21 +252,14 @@ public class VolumeInfo {
             return isbn.get(0).getIdentifier();
         }
             else if(isbn.size()>1) {
-            if (isbn.get(1).getType().contentEquals("ISBN_13"))
-                Isbn13 =isbn.get(1).getIdentifier();
+            if (isbn.get(1).getType().contentEquals("ISBN_13")) {
+                Isbn13 = isbn.get(1).getIdentifier();
                 return isbn.get(1).getIdentifier();
-
+            }
         }
 
-        else return "0";
+         return "0";
     }
 
-   // @Override
-   // public String toString() {
-    //    List <IndustryIdentifier> isbn = getIndustryIdentifiers();
-     //   if(subtitle==null)
-     //       return new ToStringBuilder(this).append("isbn", getIsbn()).append("title", title).append("publisher", publisher).append("publishedDate",publishedDate).append("pageCount",pageCount).append("thumbnailUrl",getImageLinks().getThumbnail()).append("language", language).append("previewLink", previewLink).append("averageRating",averageRating).append("authors", authors).append("categories", categories).toString();
-       // else return new ToStringBuilder(this).append("isbn", getIsbn()).append("title", title).append("subtitle",subtitle).append("publisher", publisher).append("publishedDate",publishedDate).append("description", StringUtils.substringBefore(description,".")).append("pageCount",pageCount).append("thumbnailUrl",getImageLinks().getThumbnail()).append("language", language).append("previewLink", previewLink).append("averageRating",averageRating).append("authors", authors).append("categories", categories).toString();
 
-   // }
 }

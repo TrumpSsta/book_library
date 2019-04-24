@@ -163,7 +163,7 @@ public class BookTest {
 
         List<Item> x =  book.getItems();
         VolumeInfo informations = x.get(1).getVolumeInfo();
-        assertEquals(informations.getLanguage(),"en");
+        assertEquals("en",informations.getLanguage());
     }
     @Test
     public void volumeInfo_title_ShouldEquals(){
@@ -171,7 +171,7 @@ public class BookTest {
 
         List<Item> x =  book.getItems();
         VolumeInfo informations = x.get(0).getVolumeInfo();
-        assertEquals(informations.getTitle(),"A Hypervista of the Java Landscape");
+        assertEquals("A Hypervista of the Java Landscape", informations.getTitle());
     }
 
 }

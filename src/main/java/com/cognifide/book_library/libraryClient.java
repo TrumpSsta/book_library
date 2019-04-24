@@ -3,7 +3,6 @@ package com.cognifide.book_library;
 import com.google.api.services.books.model.Volume;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,10 +12,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.PostConstruct;
 import java.io.FileNotFoundException;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
+
 import java.util.List;
-import java.util.Map;
+
 
 @RestController
 public class libraryClient {
@@ -86,7 +84,7 @@ public class libraryClient {
         }
         sB.append("\n]");
         listOfBooks= sB.toString();
-        Gson gson = new Gson();
+
 
 
         return new ResponseEntity<>(listOfBooks, HttpStatus.OK);

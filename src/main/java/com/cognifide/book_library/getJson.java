@@ -37,10 +37,8 @@ public class getJson {
 
         Book book;
         BufferedReader reader = new BufferedReader(new FileReader(pathName));
-        // BufferedReader reader = new BufferedReader(new FileReader("/home/jedrzej/Documents/books.json"));
         book = gson.fromJson(reader, Book.class);
         List<Item> x =  book.getItems();
-        VolumeInfo informations = x.get(1).getVolumeInfo();
         return x;
     }
 
