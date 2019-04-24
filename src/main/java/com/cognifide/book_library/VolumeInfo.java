@@ -64,7 +64,7 @@ public class VolumeInfo {
     private  String canonicalVolumeLink;
     @SerializedName("averageRating")
     @Expose
-    private double averageRating ;
+    private double averageRating;
     @SerializedName("authors")
     @Expose
     private List<String> authors = null;

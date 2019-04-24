@@ -8,11 +8,12 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.List;
 import java.util.Scanner;
-
-public class getJson {
+//clas for reading json file
+public class GetJson {
 
     String jsonFile;
     List<Item> items;
+    //zapisywanie ścieżki do pliku json z klawiatury
     public void selectFile()
     {
         Scanner scan = new Scanner(System.in);
@@ -25,10 +26,10 @@ public class getJson {
         return jsonFile;
     }
 
-    public getJson() {
+    public GetJson() {
     }
-
-    public getJson(String file)
+    //odczytywanie książek z jsona
+    public GetJson(String file)
     {
         this.jsonFile=file;
     }

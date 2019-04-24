@@ -1,6 +1,7 @@
 package com.cognifide.book_library;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -13,6 +14,32 @@ import java.util.List;
 import static org.junit.Assert.*;
 
 public class BookTest {
+
+
+    @Test
+    public void VolumeInfo_language_ShouldEquals() {
+        Book book= prepareJson();
+
+        List<Item> items =  book.getItems();
+        VolumeInfo informations = items.get(1).getVolumeInfo();
+        assertEquals("en",informations.getLanguage());
+    }
+    @Test
+    public void volumeInfo_title_ShouldEquals(){
+        Book book= prepareJson();
+
+        List<Item> items =  book.getItems();
+        VolumeInfo informations = items.get(0).getVolumeInfo();
+        assertEquals("A Hypervista of the Java Landscape", informations.getTitle());
+    }
+
+    @Test
+    public void item_shouldBe2Objects(){
+        Book book= prepareJson();
+
+        List<Item> items =  book.getItems();
+        assertEquals(items.size(), 2);
+    }
 
     public Book prepareJson()
     {
@@ -157,21 +184,4 @@ public class BookTest {
         return book;
 
     }
-    @Test
-    public void VolumeInfo_language_ShouldEquals() {
-        Book book= prepareJson();
-
-        List<Item> x =  book.getItems();
-        VolumeInfo informations = x.get(1).getVolumeInfo();
-        assertEquals("en",informations.getLanguage());
-    }
-    @Test
-    public void volumeInfo_title_ShouldEquals(){
-        Book book= prepareJson();
-
-        List<Item> x =  book.getItems();
-        VolumeInfo informations = x.get(0).getVolumeInfo();
-        assertEquals("A Hypervista of the Java Landscape", informations.getTitle());
-    }
-
 }
