@@ -4,9 +4,10 @@
 This is a book library managment platform. Application enable libraries to share informations about their book collections with customers. I created 3 endpoints which serve the relevant informaton based on data read from JSON file. 
 ## Getting Started
 Spring Boot application, works on localhost, port 8080. There are 3 points, which returns:
--book identified by the given ISBN number, or id if field isbn13 doesnt exist,
--list of all books that are assigned to the requested category,
--Lists all authors and their rating.
+* book identified by the given ISBN number, or id if field isbn13 doesnt exist,
+* list of all books that are assigned to the requested category,
+* Lists all authors and their rating.
+
 Project was written in Intellij Idea.
 ## Run Project
 #### Clone Repository
