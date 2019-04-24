@@ -2,7 +2,6 @@ package com.cognifide.book_library;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
@@ -11,67 +10,79 @@ import java.util.List;
 import static ch.qos.logback.core.joran.action.ActionConst.NULL;
 
 public class VolumeInfo {
+    public VolumeInfo() {
+        this.thumbnailUrl = getThumbnailUrl();
+    }
 
+
+
+    @SerializedName("isbn")
+    @Expose
+    private String Isbn13 ;
     @SerializedName("title")
     @Expose
     private String title;
+    @SerializedName("subtitle")
+    @Expose
+    private String subtitle;
     @SerializedName("publisher")
     @Expose
-    private String publisher;
-    @SerializedName("industryIdentifiers")
+    private String publisher ;
+    @SerializedName("publishedDate")
     @Expose
-    private List<IndustryIdentifier> industryIdentifiers = null;
-    @SerializedName("readingModes")
+    private String publishedDate;
     @Expose
-    private ReadingModes readingModes;
-    @SerializedName("printType")
+    @SerializedName("description")
+    private String description;
+    @SerializedName("pageCount")
     @Expose
-    private String printType;
-    @SerializedName("maturityRating")
+    private Integer pageCount;
+    private  List<IndustryIdentifier> industryIdentifiers = null;
+    private  ReadingModes readingModes;
+    private  String printType;
+    private  String maturityRating;
+    private  Boolean allowAnonLogging;
+    private  String contentVersion;
+    private  ImageLinks imageLinks;
+    @SerializedName("thumbnailUrl")
     @Expose
-    private String maturityRating;
-    @SerializedName("allowAnonLogging")
-    @Expose
-    private Boolean allowAnonLogging;
-    @SerializedName("contentVersion")
-    @Expose
-    private String contentVersion;
-    @SerializedName("imageLinks")
-    @Expose
-    private ImageLinks imageLinks;
+    private String thumbnailUrl;
+    private String getThumbnailUrl() {
+        return thumbnailUrl;
+    }
+    public void setThumbnailUrl() {
+        this.thumbnailUrl = imageLinks.getThumbnail();
+    }
+
     @SerializedName("language")
     @Expose
     private String language;
     @SerializedName("previewLink")
     @Expose
-    private String previewLink;
-    @SerializedName("infoLink")
+    private  String previewLink;
+    private  String infoLink;
+    private  String canonicalVolumeLink;
+    @SerializedName("averageRating")
     @Expose
-    private String infoLink;
-    @SerializedName("canonicalVolumeLink")
-    @Expose
-    private String canonicalVolumeLink;
-    @SerializedName("subtitle")
-    @Expose
-    private String subtitle;
+    private double averageRating ;
     @SerializedName("authors")
     @Expose
     private List<String> authors = null;
-    @SerializedName("publishedDate")
-    @Expose
-    private String publishedDate;
-    @SerializedName("description")
-    @Expose
-    private String description;
-    @SerializedName("pageCount")
-    @Expose
-    private Integer pageCount;
     @SerializedName("categories")
     @Expose
     private List<String> categories = null;
-    @SerializedName("averageRating")
-    @Expose
-    private double averageRating;
+
+
+
+    public double getAverageRating() {
+        return averageRating;
+    }
+
+    public void setAverageRating(double averageRating) {
+        this.averageRating = averageRating;
+    }
+
+
 
     public String getTitle() {
         return title;
@@ -220,16 +231,42 @@ public class VolumeInfo {
     public List<String> getCategories() {
         return categories;
     }
+    public String getIsbn13() {
+        return Isbn13;
+    }
 
+    public void setIsbn13(String isbn13) {
+        Isbn13 = isbn13;
+    }
     public void setCategories(List<String> categories) {
         this.categories = categories;
     }
-    @Override
-    public String toString() {
-        List <IndustryIdentifier> isbn = getIndustryIdentifiers();
-        if(subtitle==null)
-         return new ToStringBuilder(this).append("isbn", isbn.get(0).getIdentifier()).append("title", title).append("publisher", publisher).append("publishedDate",publishedDate).append("pageCount",pageCount).append("thumbnailUrl",getImageLinks().getThumbnail()).append("language", language).append("previewLink", previewLink).append("averageRating",averageRating).append("authors", authors).append("categories", categories).toString();
-        else return new ToStringBuilder(this).append("isbn", isbn.get(0).getIdentifier()).append("title", title).append("subtitle",subtitle).append("publisher", publisher).append("publishedDate",publishedDate).append("description", StringUtils.substringBefore(description,".")).append("pageCount",pageCount).append("thumbnailUrl",getImageLinks().getThumbnail()).append("language", language).append("previewLink", previewLink).append("averageRating",averageRating).append("authors", authors).append("categories", categories).toString();
+    public String getIsbn(){
+        List <IndustryIdentifier> isbn = industryIdentifiers;
 
+        this.thumbnailUrl = imageLinks.getThumbnail();
+        this.description=StringUtils.substringBefore(description,".");
+
+        if(isbn.get(0).getType().contentEquals("ISBN_13")){
+            Isbn13 =isbn.get(0).getIdentifier();
+            return isbn.get(0).getIdentifier();
+        }
+            else if(isbn.size()>1) {
+            if (isbn.get(1).getType().contentEquals("ISBN_13"))
+                Isbn13 =isbn.get(1).getIdentifier();
+                return isbn.get(1).getIdentifier();
+
+        }
+
+        else return "0";
     }
+
+   // @Override
+   // public String toString() {
+    //    List <IndustryIdentifier> isbn = getIndustryIdentifiers();
+     //   if(subtitle==null)
+     //       return new ToStringBuilder(this).append("isbn", getIsbn()).append("title", title).append("publisher", publisher).append("publishedDate",publishedDate).append("pageCount",pageCount).append("thumbnailUrl",getImageLinks().getThumbnail()).append("language", language).append("previewLink", previewLink).append("averageRating",averageRating).append("authors", authors).append("categories", categories).toString();
+       // else return new ToStringBuilder(this).append("isbn", getIsbn()).append("title", title).append("subtitle",subtitle).append("publisher", publisher).append("publishedDate",publishedDate).append("description", StringUtils.substringBefore(description,".")).append("pageCount",pageCount).append("thumbnailUrl",getImageLinks().getThumbnail()).append("language", language).append("previewLink", previewLink).append("averageRating",averageRating).append("authors", authors).append("categories", categories).toString();
+
+   // }
 }
