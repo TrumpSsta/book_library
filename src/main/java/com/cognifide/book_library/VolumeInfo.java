@@ -3,7 +3,6 @@ package com.cognifide.book_library;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import java.util.List;
 
@@ -18,7 +17,7 @@ public class VolumeInfo {
 
     @SerializedName("isbn")
     @Expose
-    private String Isbn13 ;
+    private String isbn13 ;
     @SerializedName("title")
     @Expose
     private String title;
@@ -232,15 +231,18 @@ public class VolumeInfo {
         return categories;
     }
     public String getIsbn13() {
-        return Isbn13;
+        return isbn13;
     }
 
+
     public void setIsbn13(String isbn13) {
-        Isbn13 = isbn13;
+        this.isbn13 = isbn13;
     }
     public void setCategories(List<String> categories) {
         this.categories = categories;
     }
+
+    //chech isbn number, and set in in class object
     public String getIsbn(){
         List <IndustryIdentifier> isbn = industryIdentifiers;
 
@@ -248,15 +250,14 @@ public class VolumeInfo {
         this.description=StringUtils.substringBefore(description,".");
 
         if(isbn.get(0).getType().contentEquals("ISBN_13")){
-            Isbn13 =isbn.get(0).getIdentifier();
-            return isbn.get(0).getIdentifier();
+            isbn13 =isbn.get(0).getIdentifier();
+            return isbn13;
         }
-            else if(isbn.size()>1) {
-            if (isbn.get(1).getType().contentEquals("ISBN_13")) {
-                Isbn13 = isbn.get(1).getIdentifier();
-                return isbn.get(1).getIdentifier();
+            else if(isbn.size()>1&&isbn.get(1).getType().contentEquals("ISBN_13")) {
+                isbn13 = isbn.get(1).getIdentifier();
+                return isbn13;
             }
-        }
+
 
          return "0";
     }

@@ -2,29 +2,28 @@ package com.cognifide.book_library;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+
 
 import java.io.FileNotFoundException;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 public class ControllerMethods {
-
+    //return json as string, for given isbn number
     public String getbookByIsbnNumber(GetJson json, String id ) throws FileNotFoundException {
         Gson gson = new GsonBuilder().setPrettyPrinting().excludeFieldsWithoutExposeAnnotation().create();
         List<Item> list = json.readJson(json.getJsonFile());
+        String json1;
         for(Item item : list) {
 
             if (item.getVolumeInfo().getIsbn().equals(id)) {
                 item.getVolumeInfo().getIsbn();
 
-                String json1 = gson.toJson(item.getVolumeInfo());
+                json1 = gson.toJson(item.getVolumeInfo());
                 return json1;
             }else if (item.getVolumeInfo().getIsbn().equals("0")) {
                 item.getVolumeInfo().setIsbn13(item.getId());
                 if (item.getVolumeInfo().getIsbn13().equals(id)) {
-                    String json1 = gson.toJson(item.getVolumeInfo());
+                    json1 = gson.toJson(item.getVolumeInfo());
                     return  json1;
                 }
             }
@@ -35,7 +34,7 @@ public class ControllerMethods {
 
         return "0";
     }
-
+    //return json as String, for given category
     public String getbookByCategoryName(GetJson json, String id) throws FileNotFoundException {
         String listOfBooks ="[ \n";
         StringBuilder sB = new StringBuilder(listOfBooks);
@@ -62,12 +61,12 @@ public class ControllerMethods {
         return listOfBooks;
 
     }
-
+    //return authors with ratings
     public String getAuthorsWithRatings(GetJson json) throws FileNotFoundException {
         List<String>authors = getAuthors(json);
         String listOfBooks ="[ \n";
+        Map<String,Double> authorWithRating = new HashMap<>();
         StringBuilder sB = new StringBuilder(listOfBooks);
-        Gson gson = new GsonBuilder().setPrettyPrinting().excludeFieldsWithoutExposeAnnotation().create();
         List<Item> list = json.readJson(json.getJsonFile());
         for(String author : authors) {
             double rating=0.0;
@@ -75,32 +74,42 @@ public class ControllerMethods {
             for(Item item : list) {
                 if (item.getVolumeInfo().getAuthors() != null) {
                     for (String name : item.getVolumeInfo().getAuthors()) {
-                        if (name.equals(author)) {
-                            if(!Double.isNaN(item.getVolumeInfo().getAverageRating())) {
+                        if (name.equals(author)&&!Double.isNaN(item.getVolumeInfo().getAverageRating())) {
 
                                 rating+=item.getVolumeInfo().getAverageRating();
                                 counter++;
                             }
-                        }
+
                     }
 
                 }
             }
 
-            if((rating=rating/counter)>0) {
-                sB.append("  {  \n    \"author\": \"" + author + "\"," + System.lineSeparator());
-                sB.append("  {  \n    \"averageRating\": " + rating + System.lineSeparator() + "  }," + System.lineSeparator());
+            if(counter>0&&(rating=rating/counter)>0) {
+                authorWithRating.put(author,rating);
+
 
             }
+        }
+
+        LinkedHashMap<String, Double> reverseSortedMap = new LinkedHashMap<>();
+        authorWithRating.entrySet()
+                .stream()
+                .sorted(Map.Entry.comparingByValue(Comparator.reverseOrder()))
+                .forEachOrdered(x -> reverseSortedMap.put(x.getKey(), x.getValue()));
+        for (Map.Entry<String,Double> pair : reverseSortedMap.entrySet()) {
+            sB.append("  {  \n    \"author\": \"" + pair.getKey() + "\"," + System.lineSeparator());
+            sB.append("  {  \n    \"averageRating\": " + pair.getValue() + System.lineSeparator() + "  }," + System.lineSeparator());
         }
         sB.append("]");
         listOfBooks= sB.toString();
         return listOfBooks;
 
     }
+    //return list of authors
     public List<String> getAuthors (GetJson json) throws FileNotFoundException {
 
-        List<String>authors = new LinkedList<String>();
+        List<String>authors = new LinkedList<>();
         List<Item> list = json.readJson(json.getJsonFile());
         for(Item item : list) {
             if(item.getVolumeInfo().getAuthors()!=null) {
@@ -112,6 +121,7 @@ public class ControllerMethods {
         }
         return authors;
     }
+    //check author is already on list
     public boolean checkAuthorsList(List<String> authors, String name){
         for(String author :authors)
         {

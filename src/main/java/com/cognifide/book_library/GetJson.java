@@ -39,8 +39,8 @@ public class GetJson {
         Book book;
         BufferedReader reader = new BufferedReader(new FileReader(pathName));
         book = gson.fromJson(reader, Book.class);
-        List<Item> x =  book.getItems();
-        return x;
+
+        return book.getItems();
     }
 
 

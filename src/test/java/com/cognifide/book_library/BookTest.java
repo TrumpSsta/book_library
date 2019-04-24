@@ -38,7 +38,7 @@ public class BookTest {
         Book book= prepareJson();
 
         List<Item> items =  book.getItems();
-        assertEquals(items.size(), 2);
+        assertEquals(2,items.size() );
     }
 
     public Book prepareJson()

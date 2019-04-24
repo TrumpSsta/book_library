@@ -1,18 +1,14 @@
 package com.cognifide.book_library;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.PostConstruct;
 import java.io.FileNotFoundException;
 
-import java.util.List;
+
 
 
 @RestController
@@ -24,7 +20,7 @@ public class LibraryClient {
     json.selectFile();
     }
     //Metoda GET, zwracająca książke o danym numerze isbn
-    @RequestMapping(value="/isbn/{id}", method = RequestMethod.GET)
+    @GetMapping(value="/isbn/{id}")
     public ResponseEntity<String> getBookByIsbn(@PathVariable("id") String id) throws FileNotFoundException {
         ControllerMethods methods = new ControllerMethods();
         String json1= methods.getbookByIsbnNumber(json,id);
@@ -38,7 +34,7 @@ public class LibraryClient {
 
     }
     //metoda zwracająca rating --work in progress
-    @RequestMapping(value="/rating", method = RequestMethod.GET)
+    @GetMapping(value="/rating")
     public ResponseEntity<String> getAuthorsRating() throws FileNotFoundException {
         ControllerMethods methods = new ControllerMethods();
         String returnableValue=methods.getAuthorsWithRatings(json);
@@ -46,7 +42,7 @@ public class LibraryClient {
     }
 
     //metoda GET zwracająca książki dla danej kategorii
-    @RequestMapping(value="/category/{id}", method = RequestMethod.GET)
+    @GetMapping(value="/category/{id}")
     public ResponseEntity<String> getBookByCategory(@PathVariable("id") String id) throws FileNotFoundException {
         ControllerMethods methods = new ControllerMethods();
         String returnableValue = methods.getbookByCategoryName(json,id);
