@@ -32,10 +32,19 @@ To build the project use following command:
 ```
 ./gradlew build
 ```
+or 
+```
+gradle build
+```
+
 ### Running
 After building the application run following command to start it:
 ```
 ./gradlew run
+```
+or 
+```
+gradle run
 ```
 ## How to use
 There was possibility to select dataset file, but worked only when i run project in IDE, so i had to remove part of code which allowed changinf json file. The only option to change file is to replace books.json, with file with the same name.<br />
