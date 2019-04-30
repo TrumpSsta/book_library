@@ -74,7 +74,7 @@ I used Junit 4 for tests.
 
 To run the automated tests:
 ```
-./gradlew test
+gradle test
 ```
 
 ## Built With
