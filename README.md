@@ -24,11 +24,11 @@ To Serialize/Deserialize json i chose [GSON](https://github.com/google/gson) lib
 At first clone repository
 
 ```
-$ git clone https://github.com/TrumpSsta/book_library.git
+git clone https://github.com/TrumpSsta/book_library.git
 ```
 
 ### Build Project
-To build the project use following command:
+To build the project open project directory,then use following command:
 ```
 gradle build
 ```
