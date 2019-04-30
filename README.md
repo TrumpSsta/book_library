@@ -26,7 +26,6 @@ At first clone repository
 ```
 git clone https://github.com/TrumpSsta/book_library.git
 ```
-
 ### Build Project
 To build the project open project directory,then use following command:
 ```
