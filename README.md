@@ -45,21 +45,21 @@ After running you can use application in your browser.
 To get book with isbn number, put this address into browser:
 
 ```
-http://localhost:8080/isbn/9780080568782
+localhost:8080/isbn/9780080568782
 ```
 The "9780080568782" number can be replacew with book isbn13 number, or book id when doesn't have isbn13. 
 
 To get book with isbn number, put this address into browser:
 
 ```
-http://localhost:8080/category/Computers  
+localhost:8080/category/Computers  
 ```
 Category "Computers" you can replace with another category name.
 
 To get author rating, put this address into browser:
 
 ```
-http://localhost:8080/rating 
+localhost:8080/rating 
 ```
 ## Running the tests
 I used Junit 4 for tests.
