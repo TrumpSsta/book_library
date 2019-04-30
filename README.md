@@ -30,19 +30,11 @@ $ git clone https://github.com/TrumpSsta/book_library.git
 ### Build Project
 To build the project use following command:
 ```
-./gradlew build
-```
-or 
-```
 gradle build
 ```
 
 ### Running
 After building the application run following command to start it:
-```
-./gradlew run
-```
-or 
 ```
 gradle run
 ```
