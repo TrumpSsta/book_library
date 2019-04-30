@@ -90,7 +90,7 @@ public class ControllerMethods {
                 .forEachOrdered(x -> reverseSortedMap.put(x.getKey(), x.getValue()));
         for (Map.Entry<String,Double> pair : reverseSortedMap.entrySet()) {
             sB.append(" {  \n  \"author\": \"" + pair.getKey() + "\"," + System.lineSeparator());
-            sB.append(" {  \n  \"averageRating\": " + pair.getValue() + System.lineSeparator() + " }," + System.lineSeparator());
+            sB.append("   \n  \"averageRating\": " + pair.getValue() + System.lineSeparator() + " }," + System.lineSeparator());
         }
         sB.append("]");
         listOfBooks= sB.toString();
